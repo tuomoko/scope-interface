@@ -1,10 +1,20 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+u"""Plot the saved trace.
+
+Plots data saved from the scope to the traces/ folder.
+By default the script plots the latest trace, but this can be customized by
+adding the filename as a command line argument.
+
+@author: Tuomo Kohtamäki
+"""
 import matplotlib.pyplot as plt
 import numpy as np
 import glob
 import sys
 
 if len(sys.argv) == 1:
-    list_of_files = glob.glob('traces/*.npz') # * means all if need specific format then *.csv
+    list_of_files = glob.glob('traces/*.npz')
     filename = max(list_of_files)
 else:
     filename = sys.argv[1]

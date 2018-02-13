@@ -1,11 +1,19 @@
-import matplotlib.pyplot as plt
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+u"""Capture the displayed traces from the oscilloscope.
+
+The data is saved to traces/ folder. It can be displayed by running the
+plot_saved_data.py script.
+
+@author: Tuomo Kohtamäki
+"""
 import numpy as np
 import datetime
 from scope_functions import DL1540
 
 filename = 'traces/'+datetime.datetime.now().isoformat()+'.npz'
 
-scope = DL1540(0,1)
+scope = DL1540(0, 1)
 scope.stop()
 
 channels_enabled = scope.channels_enabled()
@@ -19,17 +27,6 @@ for ch_idx, enabled in enumerate(channels_enabled):
 
 channel_data = np.array(channel_data)
 
-np.savez_compressed(filename,channel_data=channel_data,t_data=t_data)
+np.savez_compressed(filename, channel_data=channel_data, t_data=t_data)
 
 # Plotting moved to plot_saved_data.py
-'''
-# plot graphs
-for count, y_data in enumerate(channel_data):
-    plt.subplot(2, 2, count + 1)
-    plt.plot(t_data, y_data)
-    plt.xlabel('Voltage (V)')
-    plt.ylabel('Time (s)')
-    plt.grid(True)
-
-plt.show()
-'''
